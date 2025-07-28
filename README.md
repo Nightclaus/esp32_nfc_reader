@@ -4,7 +4,7 @@ This project provides a custom NFC reader solution using an ESP32 microcontrolle
 
 ## Abstract
 
-This project offers a physical "tap-on" device to enhance engagement with a digital currency system, similar to the system used by Timezone. This solution is financially viable, with an estimated electronics cost of $10.71 per unit. The system utilizes an ESP32 with WiFi for API-based validation and is powered by a wall socket, with a portable version available upon request.
+This project offers a physical "tap-on" device to enhance engagement with a digital currency system, similar to the system used by Timezone. This solution is financially viable, with an estimated electronics cost of $10.71 per unit. The system utilises an ESP32 with WiFi for API-based validation and is powered by a wall socket, with a portable version available upon request.
 
 ## Features
 
@@ -15,12 +15,12 @@ This project offers a physical "tap-on" device to enhance engagement with a digi
 
 ## Hardware Components
 
-| Component         | Model                       | Price (incl GST) |
-| ----------------- | --------------------------- | ---------------- |
-| **Main**          | ESP32 Wroom 32 DevKit V1    | $4.40            |
-| **TFT LED Display** | ILI9341                     | $11.98           |
-| **NFC Reader**    | PN532                       | $5.05            |
-| **Total**         |                             | **$21.43**       |
+| Component         | Model                       | Price (AUD)      | Pin Group        | Pin              |
+| ----------------- | --------------------------- | ---------------- | ---------------- | ---------------- |
+| **Main**          | ESP32 Wroom 32 DevKit V1    | $4.40            | n/a              | n/a              |
+| **TFT LED Display** | ILI9341                     | $11.98           | SPI            | MOSI (GP 23), MISO (GP 19), SCK (GPIO 18),CS (GPIO 5), DC (GPIO 16), LED (GPIO 25) [DAC], RST (GPIO 17) |
+| **NFC Reader**    | PN532                       | $5.05            | I2C              | SDA (GPIO 21), SCL (GPIO 22) |
+| **Total**         |                             | **$21.43**       | n/a              | n/a              |
 
 ## Software and Libraries
 
@@ -30,9 +30,16 @@ This project offers a physical "tap-on" device to enhance engagement with a digi
 - **API:** A RESTful API built with Express.js and hosted on Vercel.
 - **Database:** Supabase PostgreSQL backend.
 
-## Challenges
+## Pinouts
 
-A significant challenge was the ESP32's pin constraints, where the TFT display's ADC2 pins were unusable while WiFi was active. This was resolved by programmatically remapping four general-purpose I/O pins to create a software-based SPI interface for the display.
+Due to the ESP32's pin constraints, where ADC2 pins are unusable while WiFi is active (refer to ESP32 pinout, HSPI is unvaliable, use VSPI), insure you follow the pinouts.
+![Pinout diagram of hardware](/pinout-diagram.png "Pinout Diagram (Refer to table above)")
+![Pinout diagram of ESP32](ESP32-Pinout.jpg "ESP32 Pinout (Ensure you avoid the pins labelled with ADC2)")
+
+## Case
+- ** Use for the base holder PrototypeShell.stl
+- ** Use FullPrint.stl for the full holder
+![Sliced file](SlicePreview.png "Creativity Slicer Preview")
 
 ## Getting Started
 
